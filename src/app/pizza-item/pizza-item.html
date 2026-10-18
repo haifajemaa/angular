@@ -1,1 +1,35 @@
-<p>pizza-item works!</p>
+<div>
+  <img [src]="pizza().image" [alt]="pizza().name" width="100">
+
+  {{ pizza().name }}
+
+  @if (pizza().vegetarian) {
+    <span class="text-success fw-bold">Pizza végétarienne</span>
+  }
+
+  {{ pizza().price }}
+
+  <button class="btn btn-dark"
+          (click)="supprimer(pizza().id)">
+    Supprimer
+  </button>
+
+  <button class="btn btn-link" (click)="ondisplay()">
+    {{ display() ? 'Masquer les commentaires' : 'Afficher les commentaires' }}
+  </button>
+
+  @if (display()) {
+    @if (pizza().comments && pizza().comments!.length > 0) {
+      <ul>
+        @for (comment of pizza().comments!; track comment.id) {
+          <hai-pizza-comment
+            [comment]="comment"
+            (comm)="ondeleteliste($event)">
+          </hai-pizza-comment>
+        }
+      </ul>
+    } @else {
+      <div>Aucun commentaire</div>
+    }
+  }
+</div>

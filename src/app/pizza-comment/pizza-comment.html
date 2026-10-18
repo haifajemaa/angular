@@ -1,1 +1,10 @@
-<p>pizza-comment works!</p>
+<li>
+  {{ comment().date | date:'dd-MM-yyyy' }}
+  -- {{ comment().name }}
+  -- {{ comment().message }}
+
+  <button class="btn btn-danger btn-sm"
+          (click)="onenvoye(comment().id)">
+    Supprimer
+  </button>
+</li>

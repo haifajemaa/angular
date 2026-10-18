@@ -1,40 +1,17 @@
-
 <h1>Liste des pizzas</h1>
 
-<ul class="list-group">
-  @for (item of pizzasList(); track $index) {
-    <li
-      class="list-group-item"
-      [class.bg-warning]="item.vegetarian">
-
-      <img
-        [src]="item.image"
-        [alt]="item.name"
-        width="100"
-        class="rounded-circle">
-
-      <span class="badge text-bg-dark m-4">
-        {{ item.name }}
-      </span>
-
-      @if (item.vegetarian) {
-        <span class="text-success fw-bold">
-          Pizza végétarienne
-        </span>
-      }
-
-      Prix :{{ item.price | number:'2.3-3' }}
-
-      <button
-        (click)="supprimer(item)"
-        class="btn btn-dark">
-        Supprimer
-      </button>
-
-      <button class="btn btn-primary">
-        Afficher les commentaires
-      </button>
-
+<ul>
+  @for (pizza of pizzasList(); track pizza.id) {
+    <li>
+      <hai-pizza-item
+        [pizza]="pizza"
+        (deletepizza)="supprimerPizza($event)"
+        (deletecomment)="supprimercomment($event)">
+      </hai-pizza-item>
     </li>
   }
 </ul>
+
+<h2>Liste des pizzas au format JSON</h2>
+
+<pre>{{ pizzasList() | json }}</pre>
